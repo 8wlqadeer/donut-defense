@@ -57,7 +57,7 @@ regen_enemy = ExtResource("13_hoskn")
 weak_boss = ExtResource("14_rq2ei")
 frost_enemy = ExtResource("15_v7bad")
 boss_enemy = ExtResource("16_iqeo1")
-wave = 24
+wave = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 7.5, 9, 10)
