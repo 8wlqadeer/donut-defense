@@ -1,0 +1,359 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        2.875933885574341,
+        0.8937240242958069,
+        1.5517970323562622
+      ],
+      "min": [
+        -1.0525059700012207,
+        -3.6103429794311523,
+        -1.6742500066757202
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 786384,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.999887228012085,
+        0.9999926686286926,
+        0.9999312162399292
+      ],
+      "min": [
+        -0.9998283386230469,
+        -0.999995768070221,
+        -0.9998575448989868
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.9999628067016602,
+        0.9999616742134094,
+        0.9999997019767761,
+        1.0
+      ],
+      "min": [
+        -0.9999502897262573,
+        -0.999999463558197,
+        -0.9999999403953552,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.9995599985122681,
+        0.9995800256729126
+      ],
+      "min": [
+        0.0004250000056345016,
+        0.0006300000241026282
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 188337,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1572768,
+      "componentType": 5126,
+      "count": 3617,
+      "max": [
+        2.875933885574341,
+        0.8663560152053833,
+        1.5016299486160278
+      ],
+      "min": [
+        -1.022616982460022,
+        -3.6103429794311523,
+        -1.6421420574188232
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1616172,
+      "componentType": 5126,
+      "count": 3617,
+      "max": [
+        0.9993793368339539,
+        0.9987867474555969,
+        0.9994295239448547
+      ],
+      "min": [
+        -0.9986086487770081,
+        -0.9992544651031494,
+        -0.9998575448989868
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 1048512,
+      "componentType": 5126,
+      "count": 3617,
+      "max": [
+        0.9991726875305176,
+        0.9999616742134094,
+        0.9999898076057434,
+        1.0
+      ],
+      "min": [
+        -0.9995142817497253,
+        -0.9999414086341858,
+        -0.9994540214538574,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 524256,
+      "componentType": 5126,
+      "count": 3617,
+      "max": [
+        0.9995539784431458,
+        0.9995390176773071
+      ],
+      "min": [
+        0.0004980000085197389,
+        0.000699999975040555
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 753348,
+      "componentType": 5125,
+      "count": 4035,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Z3D Scanning Services (https://sketchfab.com/z3d.nz)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/3d-scan-dragon-fruit-pitaya-c7833d1adf434d66a694d732f6dc5446",
+      "title": "3D Scan: Dragon Fruit / Pitaya"
+    },
+    "generator": "Sketchfab-12.65.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 769488,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 553192,
+      "byteOffset": 769488,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1659576,
+      "byteOffset": 1322680,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1106384,
+      "byteOffset": 2982256,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 4088640,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsRequired": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "extensionsUsed": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "images": [
+    {
+      "uri": "textures/material_0_diffuse.jpeg"
+    },
+    {
+      "uri": "textures/material_0_specularGlossiness.png"
+    },
+    {
+      "uri": "textures/material_0_normal.jpeg"
+    }
+  ],
+  "materials": [
+    {
+      "emissiveFactor": [
+        0.078125,
+        0.078125,
+        0.078125
+      ],
+      "emissiveTexture": {
+        "index": 0
+      },
+      "extensions": {
+        "KHR_materials_pbrSpecularGlossiness": {
+          "diffuseFactor": [
+            0.6814374766382959,
+            0.6814374766382959,
+            0.6814374766382959,
+            1.0
+          ],
+          "diffuseTexture": {
+            "index": 0
+          },
+          "glossinessFactor": 0.777,
+          "specularFactor": [
+            0.03201588670857908,
+            0.03201588670857908,
+            0.03201588670857908
+          ],
+          "specularGlossinessTexture": {
+            "index": 1
+          }
+        }
+      },
+      "name": "material_0",
+      "normalTexture": {
+        "index": 2
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_1",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        0.5580159153433755,
+        -0.013253513671219288,
+        -0.03590930895824718,
+        0.0,
+        -0.011078593395919656,
+        -0.5581913091823232,
+        0.033862102218523135,
+        0.0,
+        -0.03663875946583239,
+        -0.033071460981176734,
+        -0.5571452137862956,
+        0.0,
+        2.0419743061065674,
+        -11.552364349365236,
+        9.884588241577147,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2,
+        3
+      ],
+      "name": "dragonFruit_low2.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    },
+    {
+      "mesh": 1,
+      "name": "Object_3"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}

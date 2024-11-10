@@ -1,0 +1,11 @@
+Model Information:
+* title:	3D Scan: Dragon Fruit / Pitaya
+* source:	https://sketchfab.com/3d-models/3d-scan-dragon-fruit-pitaya-c7833d1adf434d66a694d732f6dc5446
+* author:	Z3D Scanning Services (https://sketchfab.com/z3d.nz)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "3D Scan: Dragon Fruit / Pitaya" (https://sketchfab.com/3d-models/3d-scan-dragon-fruit-pitaya-c7833d1adf434d66a694d732f6dc5446) by Z3D Scanning Services (https://sketchfab.com/z3d.nz) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
