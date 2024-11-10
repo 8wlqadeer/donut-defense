@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7hcwdd8l4cyt"]
+
+[ext_resource type="PackedScene" uid="uid://bg4v8rsmug2uk" path="res://scenes/misc/tower_1.tscn" id="1_8b64x"]
+
+[node name="game" type="Node2D"]
+
+[node name="Tower1" parent="." instance=ExtResource("1_8b64x")]
+
+[node name="Camera2D" type="Camera2D" parent="Tower1"]

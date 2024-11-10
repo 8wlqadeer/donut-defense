@@ -1,0 +1,222 @@
+[gd_scene load_steps=29 format=3 uid="uid://c8kymk2oqtt5a"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_l4ev4"]
+[ext_resource type="PackedScene" uid="uid://dl5ta8vo8kdpb" path="res://scenes/tiles/tile_end.tscn" id="2_m4poc"]
+[ext_resource type="PackedScene" uid="uid://bxo83i3e328ws" path="res://scenes/tiles/tile_corner.tscn" id="4_kjm67"]
+[ext_resource type="PackedScene" uid="uid://d026xn43h8mdw" path="res://scenes/tiles/tile_straight.tscn" id="4_l8nue"]
+[ext_resource type="PackedScene" uid="uid://dmbum2tjva4b0" path="res://scenes/tiles/tile_crossroads.tscn" id="5_h0p4i"]
+[ext_resource type="PackedScene" uid="uid://wvo0s0xqpio" path="res://scenes/tiles/tile_crystal.tscn" id="7_3hiqv"]
+[ext_resource type="PackedScene" uid="uid://d3t7dcfftj43s" path="res://resources/assets/enemy_ufoGreen.glb" id="7_rkirp"]
+[ext_resource type="PackedScene" uid="uid://dh7ioish3cl0" path="res://scenes/tiles/tile_rock.tscn" id="8_rsgtd"]
+[ext_resource type="PackedScene" uid="uid://dfuiq4sep0jnu" path="res://scenes/tiles/tile_tree.tscn" id="9_pltl3"]
+[ext_resource type="PackedScene" uid="uid://3tq70dfb1kj8" path="res://scenes/tiles/tile_empty.tscn" id="10_j8dv4"]
+[ext_resource type="PackedScene" uid="uid://ccqkedjs3kku" path="res://scenes/game/basic_enemy.tscn" id="12_glspc"]
+[ext_resource type="PackedScene" uid="uid://bny5vu4phqdvh" path="res://scenes/game/speedy_enemy.tscn" id="12_o841l"]
+[ext_resource type="PackedScene" uid="uid://dluicspmj1iat" path="res://scenes/game/regen_enemy.tscn" id="13_hoskn"]
+[ext_resource type="AudioStream" uid="uid://cp6e0o8c6w8ln" path="res://resources/assets/661012_Space-Battle.mp3" id="13_yv23h"]
+[ext_resource type="PackedScene" uid="uid://d1qdte5v0xatm" path="res://scenes/game/watermelon_place_button.tscn" id="14_gaxm1"]
+[ext_resource type="PackedScene" uid="uid://cb1dd534so6s8" path="res://scenes/game/weak_boss.tscn" id="14_rq2ei"]
+[ext_resource type="Script" path="res://scenes/game/Camera3D.gd" id="15_5rk8r"]
+[ext_resource type="Texture2D" uid="uid://uynhvcg7pm7a" path="res://resources/assets/0dcf73474747394fe3f6f10e60f6d411.png" id="15_eeeia"]
+[ext_resource type="PackedScene" uid="uid://cvyoh2kfmu53j" path="res://scenes/game/frost_enemy.tscn" id="15_v7bad"]
+[ext_resource type="PackedScene" uid="uid://nfbi0klwk7pu" path="res://scenes/game/watermelon.tscn" id="16_i6rpe"]
+[ext_resource type="Texture2D" uid="uid://tgqsnf87q16n" path="res://resources/assets/vecteezy_cartoon-flat-cute-red-apple_32329347.png" id="17_2lxrb"]
+[ext_resource type="PackedScene" uid="uid://du4lsgjdrutwd" path="res://scenes/game/apple.tscn" id="17_x5phl"]
+[ext_resource type="Script" path="res://scripts/Money.gd" id="17_yuyqc"]
+[ext_resource type="Script" path="res://scripts/AppleActivityButton.gd" id="18_52knq"]
+[ext_resource type="Script" path="res://scripts/Health.gd" id="18_yhojt"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_fvwa8"]
+
+[sub_resource type="Sky" id="Sky_stpxp"]
+sky_material = SubResource("PhysicalSkyMaterial_fvwa8")
+
+[sub_resource type="Environment" id="Environment_xvnkr"]
+background_mode = 2
+sky = SubResource("Sky_stpxp")
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_l4ev4")
+tile_start = ExtResource("2_m4poc")
+tile_end = ExtResource("2_m4poc")
+tile_straight = ExtResource("4_l8nue")
+tile_corner = ExtResource("4_kjm67")
+tile_crossroads = ExtResource("5_h0p4i")
+tile_enemy = ExtResource("7_rkirp")
+tile_empty = Array[PackedScene]([ExtResource("7_3hiqv"), ExtResource("8_rsgtd"), ExtResource("9_pltl3"), ExtResource("10_j8dv4"), ExtResource("10_j8dv4"), ExtResource("10_j8dv4"), ExtResource("10_j8dv4")])
+basic_enemy = ExtResource("12_glspc")
+speedy_enemy = ExtResource("12_o841l")
+regen_enemy = ExtResource("13_hoskn")
+weak_boss = ExtResource("14_rq2ei")
+frost_enemy = ExtResource("15_v7bad")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 7.5, 9, 10)
+fov = 60.0
+script = ExtResource("15_5rk8r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.776134, 0.630567, 0, -0.630567, 0.776134, -4.20911, 0.734398, 0)
+light_energy = 3.0
+shadow_enabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_yv23h")
+autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xvnkr")
+
+[node name="Labels" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WatermelonPlaceButton" parent="Labels" instance=ExtResource("14_gaxm1")]
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -19.0001
+offset_top = 598.0
+offset_right = 3625.0
+offset_bottom = 3794.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.035, 0.033)
+icon = ExtResource("15_eeeia")
+button_icon = ExtResource("15_eeeia")
+button_object = ExtResource("16_i6rpe")
+
+[node name="WaterMelonName" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 645.0
+offset_right = 228.0
+offset_bottom = 668.0
+text = "WaterMelon"
+
+[node name="WaterMelonCost" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 666.0
+offset_right = 228.0
+offset_bottom = 689.0
+text = "$100"
+
+[node name="WaterMelonDescription" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 684.0
+offset_right = 282.0
+offset_bottom = 759.0
+scale = Vector2(0.799998, 0.799998)
+text = "Shoots seedy seeds 
+at a 
+reasonable speed"
+
+[node name="ApplePlaceButton" parent="Labels" instance=ExtResource("14_gaxm1")]
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 238.0
+offset_top = 598.0
+offset_right = 3882.0
+offset_bottom = 3794.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.035, 0.033)
+icon = ExtResource("17_2lxrb")
+script = ExtResource("18_52knq")
+button_icon = ExtResource("17_2lxrb")
+button_object = ExtResource("17_x5phl")
+
+[node name="AppleUnlock" type="Button" parent="Labels"]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 638.0
+offset_right = 383.0
+offset_bottom = 692.0
+scale = Vector2(1, 1.92)
+text = "Apple Unlocked
+At Round 2"
+
+[node name="AppleName" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 645.0
+offset_right = 485.0
+offset_bottom = 668.0
+text = "Apple"
+
+[node name="AppleCost" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 666.0
+offset_right = 485.0
+offset_bottom = 689.0
+text = "$300"
+
+[node name="AppleDescription" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 684.0
+offset_right = 539.0
+offset_bottom = 759.0
+scale = Vector2(0.799998, 0.799998)
+text = "Churls out apple
+cores"
+
+[node name="Money" type="Label" parent="Labels"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("17_yuyqc")
+
+[node name="Health" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 646.0
+offset_right = 686.0
+offset_bottom = 23.0
+script = ExtResource("18_yhojt")
+
+[node name="NoMoney" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 132.0
+offset_right = 172.0
+offset_bottom = 23.0
+
+[node name="NextWave" type="Button" parent="Labels"]
+layout_mode = 0
+offset_left = 1278.0
+offset_top = -2.0
+offset_right = 1368.0
+offset_bottom = 29.0
+text = "Start wave"
+
+[node name="Wave" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 909.0
+offset_top = 2.0
+offset_right = 949.0
+offset_bottom = 25.0
+
+[node name="Score" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 1146.0
+offset_top = 2.0
+offset_right = 1186.0
+offset_bottom = 25.0
+
+[connection signal="pressed" from="Labels/NextWave" to="." method="_on_next_wave_pressed"]

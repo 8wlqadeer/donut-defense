@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://j7t8tyk2vpr4"]
+
+[ext_resource type="Script" path="res://scripts/core.gd" id="1_bjpkn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m7t37"]
+radius = 0.273242
+height = 1.0394
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5q1u"]
+albedo_color = Color(0, 0.980392, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fpsln"]
+
+[node name="core" type="Area3D"]
+transform = Transform3D(-0.000879613, 0.0999932, 0.994988, -0.999961, -0.00879638, 0, 0.00875229, -0.994949, 0.0999971, 0, 0, 0)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_bjpkn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0126046, 0, 0.029923)
+shape = SubResource("CapsuleShape3D_m7t37")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+material_override = SubResource("StandardMaterial3D_v5q1u")
+mesh = SubResource("SphereMesh_fpsln")
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

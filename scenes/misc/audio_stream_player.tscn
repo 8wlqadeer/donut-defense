@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0a1nc7ss5p8t"]
+
+[ext_resource type="AudioStream" uid="uid://dxb61w6w250ck" path="res://assets/1343846_Its-a-dream.mp3" id="1_i3le3"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_i3le3")
+autoplay = true

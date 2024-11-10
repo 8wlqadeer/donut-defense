@@ -1,0 +1,221 @@
+[gd_scene load_steps=23 format=3 uid="uid://cb1dd534so6s8"]
+
+[ext_resource type="Script" path="res://scripts/BossEnemyWeak.gd" id="1_4u5lb"]
+[ext_resource type="Script" path="res://scripts/ProgressBar.gd" id="2_5db4u"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_a4gah"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_t7ip8"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_xknkb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_garnw"]
+[ext_resource type="PackedScene" uid="uid://dq2gmx15tifye" path="res://scenes/game/donutEnemyboss.dae" id="7_qsepu"]
+[ext_resource type="PackedScene" uid="uid://cs2hhjwx8mesy" path="res://assets/donutEnemyBasicToxic.glb" id="8_qnmet"]
+[ext_resource type="PackedScene" uid="uid://bqqtx3wheh4c1" path="res://scenes/game/death.tscn" id="9_j174l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw1dr"]
+bg_color = Color(0.821751, 0.00123147, 0.000674889, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2ep8"]
+bg_color = Color(0.356869, 0.603331, 0.147863, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_y23dk"]
+viewport_path = NodePath("Healthbar")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpiwg"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.611765, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nybh2"]
+height = 0.476285
+radius = 0.704485
+
+[sub_resource type="Animation" id="Animation_jkjua"]
+resource_name = "BossDespawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/donutEnemyboss:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2, 2, 2), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2xua1"]
+resource_name = "BossSpawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/donutEnemyboss:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(2, 2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_odmmp"]
+resource_name = "Despawn"
+
+[sub_resource type="Animation" id="Animation_krklb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/donutEnemyboss:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_lcc0n"]
+resource_name = "Spawn"
+
+[sub_resource type="Animation" id="Animation_covsh"]
+resource_name = "despawn"
+
+[sub_resource type="Animation" id="Animation_aonnd"]
+resource_name = "spawn"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7bugm"]
+_data = {
+"BossDespawn": SubResource("Animation_jkjua"),
+"BossSpawn": SubResource("Animation_2xua1"),
+"Despawn": SubResource("Animation_odmmp"),
+"RESET": SubResource("Animation_krklb"),
+"Spawn": SubResource("Animation_lcc0n"),
+"despawn": SubResource("Animation_covsh"),
+"spawn": SubResource("Animation_aonnd")
+}
+
+[node name="WeakBoss" type="Node3D"]
+script = ExtResource("1_4u5lb")
+
+[node name="Healthbar" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="Healthbar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_tw1dr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o2ep8")
+max_value = 5000.0
+value = 3000.0
+show_percentage = false
+script = ExtResource("2_5db4u")
+
+[node name="EnemyStateChart" type="Node" parent="."]
+script = ExtResource("3_a4gah")
+
+[node name="CompoundState" type="Node" parent="EnemyStateChart"]
+script = ExtResource("4_t7ip8")
+initial_state = NodePath("Spawning")
+
+[node name="Spawning" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_xknkb")
+
+[node name="ToTravelling" type="Node" parent="EnemyStateChart/CompoundState/Spawning"]
+script = ExtResource("6_garnw")
+to = NodePath("../../Travelling")
+event = &"to_travelling"
+delay_in_seconds = "0.0"
+
+[node name="Travelling" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_xknkb")
+
+[node name="ToDespawning" type="Node" parent="EnemyStateChart/CompoundState/Travelling"]
+script = ExtResource("6_garnw")
+to = NodePath("../../Despawning")
+event = &"to_despawning"
+delay_in_seconds = "0.0"
+
+[node name="dying" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_xknkb")
+
+[node name="Despawning" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("5_xknkb")
+
+[node name="Path3D" type="Path3D" parent="."]
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-0.287841, 0, 0.957675, 0, 1, 0, -0.957675, 0, -0.287841, -0.0485325, 0, 3.29746)
+progress = 18.9926
+loop = false
+
+[node name="healthbarender" type="Sprite3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.25)
+texture = SubResource("ViewportTexture_y23dk")
+
+[node name="donutEnemyboss" parent="Path3D/PathFollow3D" instance=ExtResource("7_qsepu")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.5, 0)
+
+[node name="donutEnemyBasicToxic" parent="Path3D/PathFollow3D" instance=ExtResource("8_qnmet")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.5, 0)
+
+[node name="death" parent="Path3D/PathFollow3D" instance=ExtResource("9_j174l")]
+material_override = SubResource("StandardMaterial3D_jpiwg")
+
+[node name="Area3DRegDetect" type="Area3D" parent="Path3D/PathFollow3D"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3DRegDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0111318, 0.548822, 0.0270461)
+shape = SubResource("CylinderShape3D_nybh2")
+
+[node name="Area3DToxicDetect" type="Area3D" parent="Path3D/PathFollow3D"]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3DToxicDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0111318, 0.548822, 0.0270461)
+shape = SubResource("CylinderShape3D_nybh2")
+
+[node name="Area3DFrostDetect" type="Area3D" parent="Path3D/PathFollow3D"]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3DFrostDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0111318, 0.548822, 0.0270461)
+shape = SubResource("CylinderShape3D_nybh2")
+
+[node name="Area3DFireDetect" type="Area3D" parent="Path3D/PathFollow3D"]
+collision_layer = 2
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3DFireDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0111318, 0.548822, 0.0270461)
+shape = SubResource("CylinderShape3D_nybh2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7bugm")
+}
+
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Spawning" to="." method="_on_spawning_state_entered"]
+[connection signal="state_processing" from="EnemyStateChart/CompoundState/Travelling" to="." method="_on_travelling_state_processing"]
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Despawning" to="." method="_on_despawning_state_entered"]
+[connection signal="area_entered" from="Path3D/PathFollow3D/Area3DRegDetect" to="." method="_on_area_3d_reg_detect_area_entered"]
+[connection signal="area_entered" from="Path3D/PathFollow3D/Area3DToxicDetect" to="." method="_on_area_3d_toxic_detect_area_entered"]
+[connection signal="area_entered" from="Path3D/PathFollow3D/Area3DFrostDetect" to="." method="_on_area_3d_frost_detect_area_entered"]
+[connection signal="area_entered" from="Path3D/PathFollow3D/Area3DFireDetect" to="." method="_on_area_3d_fire_detect_area_entered"]

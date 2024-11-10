@@ -1,0 +1,123 @@
+[gd_scene load_steps=11 format=3 uid="uid://nfbi0klwk7pu"]
+
+[ext_resource type="Script" path="res://scripts/watermelon.gd" id="1_53ssd"]
+[ext_resource type="PackedScene" uid="uid://c3xdw87xmsocq" path="res://scenes/game/seed.tscn" id="2_m7w0a"]
+[ext_resource type="PackedScene" uid="uid://d1ophyu38xc2f" path="res://assets/watermelon.glb" id="2_vlnr2"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_ju654"]
+[ext_resource type="PackedScene" uid="uid://bnei7aual5iqa" path="res://scenes/game/FrostSeed.tscn" id="3_mj0lu"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_a8mh0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_pngx4"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_qmoua"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7vtn5"]
+radius = 3.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ko3p3"]
+size = Vector3(1.54773, 1.17664, 1.06934)
+
+[node name="Watermelon" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_53ssd")
+projectile_type = ExtResource("2_m7w0a")
+frosty_seed = ExtResource("3_mj0lu")
+
+[node name="ExtraDamageUpgrade" type="Button" parent="."]
+offset_left = 1210.0
+offset_top = 325.0
+offset_right = 1322.0
+offset_bottom = 356.0
+size_flags_horizontal = 4
+text = "All watermelons
+ get extra damage
+cost: 1000"
+metadata/_edit_use_anchors_ = true
+
+[node name="ExtraReloadUpgrade" type="Button" parent="."]
+offset_left = 1185.0
+offset_top = 270.0
+offset_right = 1363.0
+offset_bottom = 301.0
+size_flags_horizontal = 4
+text = "Faster reload cost:100
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="FrostUpgrade" type="Button" parent="."]
+offset_left = 1194.0
+offset_top = 185.0
+offset_right = 1376.0
+offset_bottom = 239.0
+size_flags_horizontal = 4
+text = "New seed knocks
+ back. Cost: 5000
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="watermelonShape" parent="." instance=ExtResource("2_vlnr2")]
+transform = Transform3D(1, 0, 0, 0, 0.988, 0, 0, 0, 1, 0.2, 0.5, -0.2)
+
+[node name="PatrolZone" type="Area3D" parent="watermelonShape"]
+transform = Transform3D(1, 0, 0, 0, 1.01215, 0, 0, 0, 1, -0.2, -0.506073, 0.2)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="watermelonShape/PatrolZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_7vtn5")
+
+[node name="projectile_spawn" type="Node3D" parent="watermelonShape"]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_ju654")
+
+[node name="CompoundState" type="Node" parent="StateChart"]
+script = ExtResource("4_a8mh0")
+initial_state = NodePath("PatrollingState")
+
+[node name="PatrollingState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("5_pngx4")
+
+[node name="AcquiringState" type="Node" parent="StateChart/CompoundState/PatrollingState"]
+script = ExtResource("6_qmoua")
+to = NodePath("../../AcquiringState")
+event = &"to_acquiring_state"
+delay_in_seconds = "0.0"
+
+[node name="AcquiringState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("5_pngx4")
+
+[node name="AttackingState" type="Node" parent="StateChart/CompoundState/AcquiringState"]
+script = ExtResource("6_qmoua")
+to = NodePath("../../AttackingState")
+event = &"to_attacking_state"
+delay_in_seconds = "0.0"
+
+[node name="PatrollingState" type="Node" parent="StateChart/CompoundState/AcquiringState"]
+script = ExtResource("6_qmoua")
+to = NodePath("../../PatrollingState")
+event = &"to_patrolling_state"
+delay_in_seconds = "0.0"
+
+[node name="AttackingState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("5_pngx4")
+
+[node name="PatrollingState" type="Node" parent="StateChart/CompoundState/AttackingState"]
+script = ExtResource("6_qmoua")
+to = NodePath("../../PatrollingState")
+event = &"to_patrolling_state"
+delay_in_seconds = "0.0"
+
+[node name="hitbox" type="CollisionShape3D" parent="." groups=["watermelon"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0043335, 0.494806, -0.034668)
+shape = SubResource("BoxShape3D_ko3p3")
+
+[connection signal="pressed" from="ExtraDamageUpgrade" to="." method="_on_extra_damage_upgrade_pressed"]
+[connection signal="pressed" from="ExtraReloadUpgrade" to="." method="_on_extra_reload_upgrade_pressed"]
+[connection signal="pressed" from="FrostUpgrade" to="." method="_on_frost_upgrade_pressed"]
+[connection signal="area_entered" from="watermelonShape/PatrolZone" to="." method="_on_patrol_zone_area_entered"]
+[connection signal="area_exited" from="watermelonShape/PatrolZone" to="." method="_on_patrol_zone_area_exited"]
+[connection signal="state_processing" from="StateChart/CompoundState/PatrollingState" to="." method="_on_patrolling_state_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/AcquiringState" to="." method="_on_acquiring_state_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/CompoundState/AcquiringState" to="." method="_on_acquiring_state_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/AttackingState" to="." method="_on_attacking_state_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/CompoundState/AttackingState" to="." method="_on_attacking_state_state_physics_processing"]

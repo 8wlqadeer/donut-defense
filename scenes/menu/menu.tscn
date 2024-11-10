@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctdbpyklrp3rb"]
+
+[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_u8n8w"]
+[ext_resource type="Texture2D" uid="uid://wequcscovgud" path="res://assets/a5ebd86a7d518e42faa21fa6d4460287.jpg" id="2_o41w8"]
+[ext_resource type="PackedScene" uid="uid://b0a1nc7ss5p8t" path="res://scenes/misc/audio_stream_player.tscn" id="3_okj6d"]
+[ext_resource type="FontFile" uid="uid://bsah61te6gso0" path="res://assets/rogueherohalfital.ttf" id="4_4o5f3"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u8n8w")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 78.0
+offset_right = 1001.0
+offset_bottom = 654.0
+scale = Vector2(1.10811, 1)
+texture = ExtResource("2_o41w8")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Camera2D" type="Camera2D" parent="TextureRect"]
+position = Vector2(379.024, 274)
+offset = Vector2(5, 0)
+zoom = Vector2(1.55, 1.55)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = 304.0
+offset_right = 51.0
+offset_bottom = 405.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "START
+"
+
+[node name="HowToPlay" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "How To Play"
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options
+"
+
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("3_okj6d")]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 494.0
+offset_top = 178.0
+offset_right = 647.0
+offset_bottom = 201.0
+scale = Vector2(2, 2.878)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_4o5f3")
+theme_override_font_sizes/font_size = 22
+text = "Donut Defence"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HowToPlay" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

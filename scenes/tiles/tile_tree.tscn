@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfuiq4sep0jnu"]
+
+[ext_resource type="PackedScene" uid="uid://chcs51hvpbwnl" path="res://assets/tile_tree.glb" id="1_devvn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yl8bk"]
+size = Vector3(0.993576, 0.975624, 1)
+
+[node name="tile_tree" type="Area3D" groups=["grid_tree"]]
+
+[node name="tile_tree" parent="." instance=ExtResource("1_devvn")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00876614, 0.487323, 0)
+shape = SubResource("BoxShape3D_yl8bk")

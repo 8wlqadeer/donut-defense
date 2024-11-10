@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyjbfydyfja6e"]
+
+[ext_resource type="Script" path="res://scripts/FireSeed.gd" id="1_8g51n"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m7t37"]
+radius = 0.273242
+height = 1.0394
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5q1u"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.980392, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_loifw"]
+radius = 0.3
+radial_segments = 8
+rings = 6
+
+[node name="FireSeed" type="Area3D"]
+transform = Transform3D(-0.000879613, 0.0999932, 0.994988, -0.999961, -0.00879638, 0, 0.00875229, -0.994949, 0.0999971, 0, -1.19209e-07, 0)
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_8g51n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3.8258, 3.72529e-09, 2.32831e-10, -7.45058e-09, 2.02596, 0, -1.16415e-09, 1.04308e-07, 2.64915, -0.126214, 0.0216291, 0.0601178)
+shape = SubResource("CapsuleShape3D_m7t37")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(3.8258, 0, 2.32831e-10, -1.11759e-08, 2.02596, -5.96046e-08, -4.65661e-10, 7.45058e-08, 2.64915, -0.0750956, 0.0110003, -0.0316245)
+material_override = SubResource("StandardMaterial3D_v5q1u")
+mesh = SubResource("SphereMesh_loifw")

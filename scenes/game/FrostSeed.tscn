@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnei7aual5iqa"]
+
+[ext_resource type="Script" path="res://FrostSeed.gd" id="1_w6fc1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m7t37"]
+radius = 0.273242
+height = 1.0394
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5q1u"]
+albedo_color = Color(0, 0.980392, 0.964706, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_loifw"]
+radius = 0.3
+radial_segments = 8
+rings = 6
+
+[node name="FrostSeed" type="Area3D"]
+transform = Transform3D(-0.000879613, 0.0999932, 0.994988, -0.999961, -0.00879638, 0, 0.00875229, -0.994949, 0.0999971, 0, 0, 0)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_w6fc1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0126046, 0, 0.029923)
+shape = SubResource("CapsuleShape3D_m7t37")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+material_override = SubResource("StandardMaterial3D_v5q1u")
+mesh = SubResource("SphereMesh_loifw")
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

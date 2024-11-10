@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1qdte5v0xatm"]
+
+[ext_resource type="Script" path="res://scripts/WaterMelonActivityButton.gd" id="1_2ooa2"]
+
+[node name="WatermelonPlaceButton" type="Button"]
+custom_minimum_size = Vector2(96, 96)
+offset_right = 75.0
+offset_bottom = 31.0
+script = ExtResource("1_2ooa2")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
